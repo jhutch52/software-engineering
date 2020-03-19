@@ -1,3 +1,21 @@
 // Place all the styles related to the Home controller here.
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
+.sidebar-closed {
+    height:100%;
+    width:60px;
+    background-color:#fff;
+    position:fixed!important;
+    z-index:1;
+    overflow:auto
+}
+.menu-icon > .line {
+    background-color: #000000;
+    height: 8px;
+    display: block;
+    width: 40px;
+    border-radius: 5px;
+}
+.menu-icon > .line + .line {
+    margin-top: 6px;
+}
