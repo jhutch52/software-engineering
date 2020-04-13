@@ -1,11 +1,31 @@
-<div class="sidebar-closed">
-    <div class="menu-icon">
-        <span class="line"></span>
-        <span class="line"></span>
-        <span class="line"></span>
-    </div>
+<!--<div class="sidebar-closed">-->
+<!--    <div class="menu-icon">-->
+<!--        <span class="line"></span>-->
+<!--        <span class="line"></span>-->
+<!--        <span class="line"></span>-->
+<!--    </div>-->
+<!--</div>-->
+<div id="mySidebar" class="sidebar">
+  <a href="javascript:void(0)" class="closebtn" onclick="document.getElementById('mySidebar').style.width = '0px'; document.getElementById('main').style.marginLeft = '65px'">&times;</a>
+  <a href="#">Compare</a>
+  <a href="#">Friends</a>
+  <a href="#">Settings</a>
+  <a href="#">Account</a>
 </div>
-<div style="margin-left:65px">
+<div id="button">
+  <button class="openbtn" onclick="document.getElementById('mySidebar').style.width = '250px'; document.getElementById('main').style.marginLeft = '250px'">&#9776;</button>
+</div>
+
+<div id="main" style="margin-left:65px">
 <h1>Home</h1>
+<p>
+    <% if current_user %>
+        Logged in as <%= current_user.name %>
+        <%= link_to "Log Out", logout_path %>
+    <% else %>
+        <%= link_to "Sign Up", signup_path %>
+        <%= link_to "Log In", login_path %>
+    <% end %>
+</p>
 <p>Your schedule (along with almost everything else) will be here</p>
 </div>
