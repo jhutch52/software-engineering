@@ -10,15 +10,13 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_04_13_014838) do
+ActiveRecord::Schema.define(version: 2020_04_15_001930) do
 
-  create_table "friends", force: :cascade do |t|
-    t.string "name"
-    t.string "email"
-    t.boolean "accepted"
+  create_table "friendships", force: :cascade do |t|
+    t.integer "user_id"
+    t.integer "friend_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.index ["email"], name: "index_friends_on_email", unique: true
   end
 
   create_table "users", force: :cascade do |t|

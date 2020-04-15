@@ -2,30 +2,18 @@
 
 <h1>Friends</h1>
 
-<table>
-  <thead>
-    <tr>
-      <th>Name</th>
-      <th>Email</th>
-      <th>Accepted</th>
-      <th colspan="3"></th>
-    </tr>
-  </thead>
-
-  <tbody>
-    <% @friends.each do |friend| %>
-      <tr>
-        <td><%= friend.name %></td>
-        <td><%= friend.email %></td>
-        <td><%= friend.accepted %></td>
-        <td><%= link_to 'Show', friend %></td>
-        <td><%= link_to 'Edit', edit_friend_path(friend) %></td>
-        <td><%= link_to 'Destroy', friend, method: :delete, data: { confirm: 'Are you sure?' } %></td>
-      </tr>
+<h2>Your Friends</h2>
+<% if current_user %>
+  <ul>
+    <% for user in @user.friends %>
+    <li><%= h user.username %></li>
+    <% end %>  
+  </ul>
+    <% else %>
+        <%= link_to "Sign Up", signup_path %>
+        <%= link_to "Log In", login_path %>
     <% end %>
-  </tbody>
-</table>
 
-<br>
 
-<%= link_to 'New Friend', new_friend_path %>
+
+

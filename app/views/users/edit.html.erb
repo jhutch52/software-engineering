@@ -1,6 +1,9 @@
-<h1>Editing User</h1>
-
-<%= render 'form', user: @user %>
+<% if current_user == @user %>
+  <h1>Editing User</h1>
+  <%= render 'form', user: @user %>
+<% else %>
+  <p>You cannot edit other users.</p>
+<% end %>
 
 <%= link_to 'Show', @user %> |
 <%= link_to 'Back', users_path %>

@@ -40,13 +40,15 @@ class UsersController < ApplicationController
   # PATCH/PUT /users/1
   # PATCH/PUT /users/1.json
   def update
-    respond_to do |format|
-      if @user.update(user_params)
-        format.html { redirect_to @user, notice: 'User was successfully updated.' }
-        format.json { render :show, status: :ok, location: @user }
-      else
-        format.html { render :edit }
-        format.json { render json: @user.errors, status: :unprocessable_entity }
+    if current_user == @user
+      respond_to do |format|
+        if @user.update(user_params)
+          format.html { redirect_to @user, notice: 'User was successfully updated.' }
+          format.json { render :show, status: :ok, location: @user }
+        else
+          format.html { render :edit }
+          format.json { render json: @user.errors, status: :unprocessable_entity }
+        end
       end
     end
   end
@@ -60,7 +62,19 @@ class UsersController < ApplicationController
       format.json { head :no_content }
     end
   end
-
+  
+  def add_friend
+    if user.find_by_email(params[:email])
+      
+    end
+  end
+  
+  def remove_friend
+    if user.find_by_email()
+      
+    end
+  end
+  
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_user
