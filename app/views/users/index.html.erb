@@ -1,6 +1,28 @@
+<div id="mySidebar" class="sidebar">
+  <%= link_to "Home", root_path %>
+  <%= link_to "Friends", friendships_path %>
+  <a href="#">Compare</a>
+  <a href="#">Settings</a>
+  <%= link_to "Account", current_user %>
+</div>
+<div id="button">
+  <button class="openbtn" onclick="
+  if (document.getElementById('mySidebar').style.width == '250px'){
+    document.getElementById('mySidebar').style.width = '0px';
+    document.getElementById('main').style.marginLeft = '50px';
+  } else {
+    
+    document.getElementById('mySidebar').style.width = '250px'; 
+    document.getElementById('main').style.marginLeft = '250px';
+  }
+  ">&#9776;</button>
+</div>
+
+<div id="main" style="padding-top: 0px; margin-left:50px">
+
 <p id="notice"><%= notice %></p>
 
-<h1>Users</h1>
+<h1>Add Friends</h1>
 
 <table>
   <thead>
@@ -28,3 +50,6 @@
 
 <br>
 
+<%= link_to 'Back', friendships_path %>
+
+</div>
