@@ -1,8 +1,6 @@
 <div id="mySidebar" class="sidebar">
   <%= link_to "Home", root_path %>
   <%= link_to "Friends", friendships_path %>
-  <a href="#">Compare</a>
-  <a href="#">Settings</a>
   <%= link_to "Account", current_user %>
 </div>
 <div id="button">
@@ -19,22 +17,92 @@
 </div>
 
 <div id="main" style="padding-top: 0px; margin-left:50px">
+    
+<p id="alert"><%= alert %></p>
 
 <p id="notice"><%= notice %></p>
 
-<h1>Your Friends</h1>
+<% if current_user %>
 
-<ul>
-<% for friendship in current_user.friendships %>
+<h1>Your Friends</h1>
+  
+  <% arr = Array.new %>
+  <% for event in current_user.events %>
+    <% if (event.start_time.beginning_of_day() < DateTime.current && event.start_time.end_of_day() > DateTime.current) || event.repeat_daily || event.start_time.days_to_week_start == DateTime.current.days_to_week_start %>
+      <% arr.push([event.start_time.seconds_since_midnight(), (event.start_time + event.length.minutes).seconds_since_midnight()]) %>
+    <% end %>
+  <% end %>
+  
+  <ul>
+  <% for friendship in current_user.friendships %>
     <li>
       <%= h friendship.friend.name %>
       <%= link_to "Remove friend", friendship, :method => :delete %>
     </li>
-<% end %>  
-</ul>
-<p>
-  <%= link_to "Add friends", users_path %> |
-  <%= link_to 'Back', root_path %>
-</p>
+    <% arr1 = arr[0..-1] %>
+    <% for event in User.find(friendship.friend_id).events %>
+      <% if (event.start_time.beginning_of_day() < DateTime.current && event.start_time.end_of_day() > DateTime.current) || event.repeat_daily || event.start_time.days_to_week_start == DateTime.current.days_to_week_start %>
+        <% arr1.push([event.start_time.seconds_since_midnight(), (event.start_time + event.length.minutes).seconds_since_midnight()]) %>
+      <% end %>
+    <% end %>
+    
+    <% arr1.push([0,0]) %>
+    <% arr1.push([86340,86340]) %>
+    
+    <% loop do %>
+      <% swapped = false %>
+      
+      <% for i in 0...arr1.length-1 %>
+        <% if arr1[i][0] > arr1[i+1][0] %>
+          <% arr1[i], arr1[i+1] = arr1[i+1], arr1[i] %>
+          <% swapped = true %>
+        <% end %>
+      <% end %>
+      
+      <% break if not swapped %>
+    <% end %>
+    
+    <% arr2 = Array.new %>
+    <% i = 0 %>
+    <% while i < arr1.length-1 %>
+      <% if arr1[i][1] < arr1[i+1][0] %>
+        <% arr2.push([arr1[i][1], arr1[i+1][0]]) %>
+        <% i = i+1 %>
+      <% else %>
+        <% arr1.delete_at(i+1) %>
+      <% end %>
+    <% end %>
+    
+    <ul><li>You have common free time from
+    
+    <% for i in 0...arr2.length-1 %> 
+      <%= (DateTime.current.beginning_of_day + arr2[i][0].seconds).to_s(:time) %>
+       to 
+      <%= (DateTime.current.beginning_of_day + arr2[i][1].seconds).to_s(:time) %>, 
+    <% end %>
+    and
+    <%= (DateTime.current.beginning_of_day + arr2[arr2.length-1][0].seconds).to_s(:time) %>
+    to 
+    <%= (DateTime.current.beginning_of_day + arr2[arr2.length-1][1].seconds).to_s(:time) %>
+    </li>
+    </ul>
+    <br>
+    
+  <% end %>
+  </ul>
+  
+  <p>
+    <%= link_to "Add friends", users_path %> |
+    <%= link_to 'Back', root_path %>
+  </p>
+  
+<% else %>
+
+  <h1>Home</h1>
+  
+  <%= link_to "Sign Up", signup_path %>
+  <%= link_to "Log In", login_path %>
+
+<% end %>
 
 </div>

@@ -24,15 +24,35 @@
 
 <p>
   <strong>Name:</strong>
-  <%= @user.name %>
+  <%= @event.name %>
 </p>
 
 <p>
-  <strong>Email:</strong>
-  <%= @user.email %>
+  <strong>Description:</strong>
+  <%= @event.description %>
 </p>
 
-<%= link_to 'Edit', edit_user_path(@user) %> |
+<p>
+  <strong>Start time:</strong>
+  <%= @event.start_time %>
+</p>
+
+<p>
+  <strong>Length:</strong>
+  <%= @event.length %>
+</p>
+
+<p>
+  <strong>Repeat daily:</strong>
+  <%= @event.repeat_daily %>
+</p>
+
+<p>
+  <strong>Repeat weekly:</strong>
+  <%= @event.repeat_weekly %>
+</p>
+
+<%= link_to 'Edit', edit_event_path(@event) %> |
 <%= link_to 'Back', root_path %>
 
 </div>

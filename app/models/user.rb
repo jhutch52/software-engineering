@@ -1,6 +1,7 @@
 class User < ApplicationRecord
-    has_many :friendships
-    has_many :friends, :through => :friendships
+    has_many :friendships, dependent: :destroy
+    has_many :friends, :through => :friendships, dependent: :destroy
+    has_many :events, dependent: :destroy
     
     VALID_EMAIL_REGEX = /\A[\w+\-.]+@[a-z\d\-]+(\.[a-z\d\-]+)*\.[a-z]+\z/i
     before_save { self.email = email.downcase }

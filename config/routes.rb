@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+  resources :events
   resources :friends
   get 'sessions/new'
   get 'sessions/create'

@@ -1,8 +1,6 @@
 <div id="mySidebar" class="sidebar">
   <%= link_to "Home", root_path %>
   <%= link_to "Friends", friendships_path %>
-  <a href="#">Compare</a>
-  <a href="#">Settings</a>
   <%= link_to "Account", current_user %>
 </div>
 <div id="button">
@@ -19,13 +17,14 @@
 </div>
 
 <div id="main" style="padding-top: 0px; margin-left:50px">
+    
+<p id="alert"><%= alert %></p>
 
 <% if current_user == @user %>
   <h1>Editing User</h1>
   <%= render 'form', user: @user %>
   
-  <%= link_to 'Show', @user %> |
-  <%= link_to 'Back', users_path %>
+  <%= link_to 'Back', @user %>
   
 <% else %>
   <p>You cannot edit other users.</p>

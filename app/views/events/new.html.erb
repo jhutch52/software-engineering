@@ -20,19 +20,10 @@
     
 <p id="alert"><%= alert %></p>
 
-<p id="notice"><%= notice %></p>
+<h1>New Event</h1>
 
-<p>
-  <strong>Name:</strong>
-  <%= @user.name %>
-</p>
+<%= render 'form', event: @event %>
 
-<p>
-  <strong>Email:</strong>
-  <%= @user.email %>
-</p>
-
-<%= link_to 'Edit', edit_user_path(@user) %> |
 <%= link_to 'Back', root_path %>
 
 </div>

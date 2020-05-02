@@ -1,9 +1,7 @@
 <div id="mySidebar" class="sidebar">
   <%= link_to "Home", root_path %>
   <%= link_to "Friends", friendships_path %>
-  <a href="#">Compare</a>
-  <a href="#">Settings</a>
-  <%= link_to "Account", @user %>
+  <%= link_to "Account", current_user %>
 </div>
 <div id="button">
   <button class="openbtn" onclick="
@@ -19,6 +17,8 @@
 </div>
 
 <div id="main" style="padding-top: 0px; margin-left:50px">
+    
+<p id="alert"><%= alert %></p>
 
 <h1>New User</h1>
 
